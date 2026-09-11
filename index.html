@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Caliph Life School — Official Student Examination Result Portal. Check your results by entering your name, roll number, and class." />
+  <meta name="theme-color" content="#0f2744" />
+  <title>Caliph Life School — Student Result Portal</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/caliph-logo.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-animated"></div>
+
+  <!-- Floating Particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- ═══════════ MAIN CONTAINER ═══════════ -->
+  <div class="container">
+
+    <!-- ─── SEARCH CARD ─── -->
+    <div class="search-card" id="searchCard">
+
+      <!-- Branding -->
+      <div class="brand-section">
+        <div class="logo-wrapper">
+          <img src="assets/caliph-logo.png" alt="Caliph Life School Logo" />
+        </div>
+        <h1 class="school-name"><span>Caliph Life School</span></h1>
+        <p class="portal-subtitle">Official Examination Result Portal</p>
+      </div>
+
+      <!-- Search Form -->
+      <form id="searchForm" autocomplete="off">
+        <div class="search-form">
+
+          <!-- Student Name -->
+          <div class="form-group">
+            <label for="studentName">Student Name <span style="font-weight: normal; opacity: 0.7; font-size: 0.85em;">(Optional)</span></label>
+            <input
+              type="text"
+              id="studentName"
+              placeholder="e.g. Ahammed Shan or leave blank"
+              spellcheck="false"
+            />
+            <span class="error-text">Please enter name or roll number</span>
+          </div>
+
+          <!-- Roll Number -->
+          <div class="form-group">
+            <label for="rollNumber">Roll / Register Number <span style="font-weight: normal; opacity: 0.7; font-size: 0.85em;">(Optional)</span></label>
+            <input
+              type="text"
+              id="rollNumber"
+              placeholder="e.g. 5 or leave blank"
+              spellcheck="false"
+            />
+            <span class="error-text">Please enter name or roll number</span>
+          </div>
+
+          <!-- Class -->
+          <div class="form-group full-width">
+            <label for="classSelect">Class / Batch</label>
+            <select id="classSelect">
+              <option value="">— Select Class —</option>
+              <option value="S2A">S2A</option>
+              <option value="S2B">S2B</option>
+              <option value="C2A">C2A</option>
+              <option value="C2B">C2B</option>
+            </select>
+            <span class="error-text">Please select a class</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="btnCheck">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span class="btn-text">Check Result</span>
+            <span class="btn-spinner"></span>
+          </button>
+          <button type="button" class="btn btn-reset" id="btnReset">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+            <span>Reset</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ─── RESULT SECTION ─── -->
+    <div class="result-section" id="resultSection">
+      <div class="result-card">
+
+        <!-- Result Header -->
+        <div class="result-header">
+          <div class="result-header-content">
+            <div class="result-logo">
+              <img src="assets/caliph-logo.png" alt="Caliph Life School" />
+            </div>
+            <h2 class="result-school-name">Caliph Life School</h2>
+            <p class="result-exam-title" id="resExamTitle">Annual Examination 2026</p>
+
+            <div class="student-info-grid">
+              <div class="student-info-item">
+                <span class="student-info-label">Student Name</span>
+                <span class="student-info-value" id="resStudentName">—</span>
+              </div>
+              <div class="student-info-item">
+                <span class="student-info-label">Roll Number</span>
+                <span class="student-info-value" id="resRollNumber">—</span>
+              </div>
+              <div class="student-info-item">
+                <span class="student-info-label">Class / Batch</span>
+                <span class="student-info-value" id="resClass">—</span>
+              </div>
+              <div class="student-info-item">
+                <span class="student-info-label">Academic Year</span>
+                <span class="student-info-value" id="resAcademicYear">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marks Table -->
+        <div class="marks-section">
+          <h3>Subject-wise Examination Marks</h3>
+          <table class="marks-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Max Marks</th>
+                <th>Pass Marks</th>
+                <th>Obtained</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="marksBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-section">
+          <div class="summary-grid">
+            <div class="summary-item">
+              <div class="label">Total Marks</div>
+              <div class="value small-text" id="totalMarks">— / —</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Percentage</div>
+              <div class="value" id="percentage">—%</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Grade</div>
+              <div class="value" id="gradeValue">—</div>
+            </div>
+          </div>
+          <div class="overall-status-card" id="overallStatus">—</div>
+        </div>
+
+        <!-- Print / Actions -->
+        <div class="print-section">
+          <button class="btn-print" onclick="printResult()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Download Marksheet (PDF)
+          </button>
+          <button class="btn-new-search" onclick="newSearch()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            New Search
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="portal-footer">
+      <p>&copy; 2026 Caliph Life School — All rights reserved.</p>
+      <p style="margin-top: 4px;">Official Examination Result Verification Portal</p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data/students.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
